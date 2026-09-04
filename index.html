@@ -43,7 +43,29 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- PASSWORD LOCK -->
+<div id="passwordLock">
+  <div class="lock-card">
+    <div class="lock-icon">🔐</div>
 
+    <h2>Something Special Awaits...</h2>
+    <p>Enter the secret code to unlock your birthday surprise 💗</p>
+
+    <div class="password-box">
+      <input
+        type="password"
+        id="passwordInput"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="Enter 4-digit code"
+        autocomplete="off"
+      >
+      <button onclick="unlockCard()">Unlock 💖</button>
+    </div>
+
+    <p id="passwordError"></p>
+  </div>
+</div>
 <!-- LOADING SCREEN -->
 <div id="loader">
   <div class="loader-cake"><i data-lucide="cake"></i></div>
