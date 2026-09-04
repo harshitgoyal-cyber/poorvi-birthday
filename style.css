@@ -6,6 +6,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+body:not(.card-unlocked) main{visibility:hidden}
 
 /* LOADING SCREEN */
 #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
@@ -170,4 +171,180 @@ footer .footer-cake{display:inline-flex;align-items:center;gap:.3rem;-webkit-tex
   .nav-dots{right:.5rem;gap:.5rem}
   .nav-dot{width:10px;height:10px}
   .nav-label{display:none}
+}
+/* ============================= */
+/* PASSWORD LOCK SCREEN */
+/* ============================= */
+
+#passwordLock {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: opacity .7s ease, visibility .7s ease;
+}
+
+#passwordLock.unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lock-card {
+  width: min(420px, 100%);
+  padding: 2.5rem 2rem;
+  text-align: center;
+
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 28px;
+
+  backdrop-filter: blur(25px);
+  box-shadow:
+    0 20px 80px rgba(0,0,0,.4),
+    0 0 50px var(--glow);
+
+  animation: lockAppear .8s ease both;
+}
+
+@keyframes lockAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lock-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: lockFloat 2s ease-in-out infinite;
+}
+
+@keyframes lockFloat {
+  0%,100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.lock-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  margin-bottom: .7rem;
+
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent2),
+    var(--accent3)
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lock-card > p {
+  color: var(--text-muted);
+  font-size: .9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.password-box {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+#passwordInput {
+  width: 100%;
+  padding: .9rem 1rem;
+
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+
+  outline: none;
+  text-align: center;
+
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  letter-spacing: .3rem;
+
+  transition: all .3s;
+}
+
+#passwordInput::placeholder {
+  letter-spacing: normal;
+  color: rgba(255,255,255,.35);
+}
+
+#passwordInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--glow);
+}
+
+.password-box button {
+  padding: .9rem 1rem;
+
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent2)
+  );
+
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.password-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--glow);
+}
+
+.password-box button:active {
+  transform: scale(.97);
+}
+
+#passwordError {
+  min-height: 1.2rem;
+  margin-top: 1rem;
+
+  color: #fb7185;
+  font-size: .8rem;
+}
+
+@media(max-width:600px) {
+  .lock-card {
+    padding: 2rem 1.3rem;
+  }
+
+  .lock-card h2 {
+    font-size: 1.7rem;
+  }
+
+  .lock-icon {
+    font-size: 3rem;
+  }
 }

@@ -14,6 +14,7 @@ function unlockCard() {
 
     // Correct password
     error.textContent = "";
+    document.body.classList.add('card-unlocked');
 
     lock.classList.add('unlocked');
 
