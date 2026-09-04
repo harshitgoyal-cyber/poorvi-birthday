@@ -3,7 +3,7 @@
 // PASSWORD LOCK
 // =============================
 
-const CORRECT_CODE = "2509";
+const CORRECT_CODE = "2705";
 
 function unlockCard() {
   const input = document.getElementById('passwordInput');
