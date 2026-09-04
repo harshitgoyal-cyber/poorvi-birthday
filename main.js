@@ -1,4 +1,45 @@
 // SECTIONS & NAVIGATION
+// =============================
+// PASSWORD LOCK
+// =============================
+
+const CORRECT_CODE = "2509";
+
+function unlockCard() {
+  const input = document.getElementById('passwordInput');
+  const error = document.getElementById('passwordError');
+  const lock = document.getElementById('passwordLock');
+
+  if (input.value === CORRECT_CODE) {
+
+    // Correct password
+    error.textContent = "";
+
+    lock.classList.add('unlocked');
+
+    // Start birthday experience
+    setTimeout(() => {
+      hideLoader();
+    }, 700);
+
+  } else {
+
+    // Wrong password
+    error.textContent = "Wrong code 😭 Try again!";
+
+    input.value = "";
+
+    input.focus();
+  }
+}
+
+
+// Press Enter to unlock
+document.getElementById('passwordInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    unlockCard();
+  }
+});
 const allSections = document.querySelectorAll('.page-section');
 let currentSection = 0;
 let autoScrollTimer = null;
@@ -74,12 +115,13 @@ function hideLoader() {
   triggerConfetti(80);
   startAutoScroll();
 }
-const hardCapTimer = setTimeout(hideLoader, 2500);
+const hardCapTimer = setTimeout(() => {
+  // Do nothing.
+  // Birthday card will start only after correct password.
+}, 2500);
+
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    clearTimeout(hardCapTimer);
-    hideLoader();
-  }, 800);
+  // Keep the loader visible until password is entered.
 });
 
 // Stop auto-scroll on manual interaction
